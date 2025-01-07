@@ -1,7 +1,5 @@
 # WinterCampSki - Ski Game Dev
 
-![Game Preview](cover.png)
-
 ## Description
 **WinterCampSki** est une adaptation hivernale du célèbre jeu "Chrome Dinosaur".  
 Le dinosaure est remplacé par un skieur évoluant dans une ambiance enneigée.  
