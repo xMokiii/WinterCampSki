@@ -1,6 +1,6 @@
 import Player from "./Player.js";
 import Ground from "./Ground.js";
-import CactiController from "./CactiController.js";
+import TreeController from "./TreeController.js";
 import Score from "./Score.js";
 
 const canvas = document.getElementById("game");
@@ -17,18 +17,18 @@ const MAX_JUMP_HEIGHT = GAME_HEIGHT;
 const MIN_JUMP_HEIGHT = 150;
 const GROUND_WIDTH = 2400;
 const GROUND_HEIGHT = 24;
-const GROUND_AND_CACTUS_SPEED = 0.5;
+const GROUND_AND_TREES_SPEED = 0.5;
 
-const CACTI_CONFIG = [
+const TREES_CONFIG = [
   { width: 48 / 1.25, height: 100 / 1.25, image: "images/sap1.png" },
   { width: 98 / 1.25, height: 100 / 1.25, image: "images/sap2.png" },
-  { width: 68 / 1.25, height: 70 / 1.25, image: "images/sap3.png" },
+  { width: 68 / 1.25, height: 70 / 1.25, image: "images/sap3.png" },  
 ];
 
 // Game Objects
 let player = null;
 let ground = null;
-let cactiController = null;
+let treeController = null; 
 let score = null;
 
 let scaleRatio = null;
@@ -60,43 +60,28 @@ function createSprites() {
     ctx,
     groundWidthInGame,
     groundHeightInGame,
-    GROUND_AND_CACTUS_SPEED,
+    GROUND_AND_TREES_SPEED,
     scaleRatio
   );
 
-  const cactiImages = CACTI_CONFIG.map((cactus) => {
+  const treesImages = TREES_CONFIG.map((trees) => {
     const image = new Image();
-    image.src = cactus.image;
+    image.src = trees.image;
     return {
       image: image,
-      width: cactus.width * scaleRatio,
-      height: cactus.height * scaleRatio,
+      width: trees.width * scaleRatio,
+      height: trees.height * scaleRatio,
     };
   });
 
-  cactiController = new CactiController(
+  treeController = new TreeController(
     ctx,
-    cactiImages,
+    treesImages,
     scaleRatio,
-    GROUND_AND_CACTUS_SPEED
+    GROUND_AND_TREES_SPEED
   );
 
   score = new Score(ctx, scaleRatio);
-}
-
-function setScreen() {
-  scaleRatio = getScaleRatio();
-  canvas.width = GAME_WIDTH * scaleRatio;
-  canvas.height = GAME_HEIGHT * scaleRatio;
-  createSprites();
-}
-
-setScreen();
-// Use setTimeout on Safari mobile rotation otherwise works fine on desktop
-window.addEventListener("resize", () => setTimeout(setScreen, 500));
-
-if (screen.orientation) {
-  screen.orientation.addEventListener("change", setScreen);
 }
 
 function getScaleRatio() {
@@ -118,14 +103,15 @@ function getScaleRatio() {
   }
 }
 
-function showGameOver() {
-  const fontSize = 70 * scaleRatio;
-  ctx.font = `${fontSize}px Verdana`;
-  ctx.fillStyle = "grey";
-  const x = canvas.width / 4.5;
-  const y = canvas.height / 2;
-  ctx.fillText("GAME OVER", x, y);
+function setScreen() {
+  scaleRatio = getScaleRatio();
+  canvas.width = GAME_WIDTH * scaleRatio;
+  canvas.height = GAME_HEIGHT * scaleRatio;
+  createSprites();
 }
+
+setScreen();
+window.addEventListener("resize", () => setTimeout(setScreen, 500));
 
 function setupGameReset() {
   if (!hasAddedEventListenersForRestart) {
@@ -133,7 +119,6 @@ function setupGameReset() {
 
     setTimeout(() => {
       window.addEventListener("keyup", reset, { once: true });
-      window.addEventListener("touchstart", reset, { once: true });
     }, 1000);
   }
 }
@@ -143,7 +128,7 @@ function reset() {
   gameOver = false;
   waitingToStart = false;
   ground.reset();
-  cactiController.reset();
+  treeController.reset();
   score.reset();
   gameSpeed = GAME_SPEED_START;
 }
@@ -155,6 +140,15 @@ function showStartGameText() {
   const x = canvas.width / 14;
   const y = canvas.height / 2;
   ctx.fillText("Tap Screen or Press Space To Start", x, y);
+}
+
+function showGameOver() {
+  const fontSize = 70 * scaleRatio;
+  ctx.font = `${fontSize}px Verdana`;
+  ctx.fillStyle = "grey";
+  const x = canvas.width / 4.5;
+  const y = canvas.height / 2;
+  ctx.fillText("GAME OVER", x, y);
 }
 
 function updateGameSpeed(frameTimeDelta) {
@@ -180,13 +174,13 @@ function gameLoop(currentTime) {
   if (!gameOver && !waitingToStart) {
     // Update game objects
     ground.update(gameSpeed, frameTimeDelta);
-    cactiController.update(gameSpeed, frameTimeDelta);
+    treeController.update(gameSpeed, frameTimeDelta);
     player.update(gameSpeed, frameTimeDelta);
     score.update(frameTimeDelta);
     updateGameSpeed(frameTimeDelta);
   }
 
-  if (!gameOver && cactiController.collideWith(player)) {
+  if (!gameOver && treeController.collideWith(player)) {
     gameOver = true;
     setupGameReset();
     score.setHighScore();
@@ -194,7 +188,7 @@ function gameLoop(currentTime) {
 
   // Draw game objects
   ground.draw();
-  cactiController.draw();
+  treeController.draw();
   player.draw(gameOver);
   score.draw();
 
