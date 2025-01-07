@@ -20,9 +20,9 @@ const GROUND_HEIGHT = 24;
 const GROUND_AND_CACTUS_SPEED = 0.5;
 
 const CACTI_CONFIG = [
-  { width: 48 / 1.5, height: 100 / 1.5, image: "images/sap1.png" },
-  { width: 98 / 1.5, height: 100 / 1.5, image: "images/sap2.png" },
-  { width: 68 / 1.5, height: 70 / 1.5, image: "images/sap3.png" },
+  { width: 48 / 1.25, height: 100 / 1.25, image: "images/sap1.png" },
+  { width: 98 / 1.25, height: 100 / 1.25, image: "images/sap2.png" },
+  { width: 68 / 1.25, height: 70 / 1.25, image: "images/sap3.png" },
 ];
 
 // Game Objects
