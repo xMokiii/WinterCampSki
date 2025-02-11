@@ -1,11 +1,11 @@
-import Cactus from "./Cactus.js";
+import Sapin from "./Sapin.js";
 
-export default class CactiController {
-  CACTUS_INTERVAL_MIN = 500;
-  CACTUS_INTERVAL_MAX = 2000;
+export default class SapinController {
+  SAPIN_INTERVAL_MIN = 500;
+  SAPIN_INTERVAL_MAX = 2000;
 
-  nextCactusInterval = null;
-  cacti = [];
+  nextSapinInterval = null;
+  sapins = [];
 
   constructor(ctx, cactiImages, scaleRatio, speed) {
     this.ctx = ctx;
@@ -14,62 +14,62 @@ export default class CactiController {
     this.scaleRatio = scaleRatio;
     this.speed = speed;
 
-    this.setNextCactusTime();
+    this.setNextSapinTime();
   }
 
-  setNextCactusTime() {
+  setNextSapinTime() {
     const num = this.getRandomNumber(
-      this.CACTUS_INTERVAL_MIN,
-      this.CACTUS_INTERVAL_MAX
+      this.SAPIN_INTERVAL_MIN,
+      this.SAPIN_INTERVAL_MAX
     );
 
-    this.nextCactusInterval = num;
+    this.nextSapinInterval = num;
   }
 
   getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  createCactus() {
+  createSapin() {
     const index = this.getRandomNumber(0, this.cactiImages.length - 1);
-    const cactusImage = this.cactiImages[index];
+    const sapinImage = this.cactiImages[index];
     const x = this.canvas.width * 1.5;
-    const y = this.canvas.height - cactusImage.height;
-    const cactus = new Cactus(
+    const y = this.canvas.height - sapinImage.height;
+    const sapin = new Sapin(
       this.ctx,
       x,
       y,
-      cactusImage.width,
-      cactusImage.height,
-      cactusImage.image
+      sapinImage.width,
+      sapinImage.height,
+      sapinImage.image
     );
 
-    this.cacti.push(cactus);
+    this.sapins.push(sapin);
   }
 
   update(gameSpeed, frameTimeDelta) {
-    if (this.nextCactusInterval <= 0) {
-      this.createCactus();
-      this.setNextCactusTime();
+    if (this.nextSapinInterval <= 0) {
+      this.createSapin();
+      this.setNextSapinTime();
     }
-    this.nextCactusInterval -= frameTimeDelta;
+    this.nextSapinInterval -= frameTimeDelta;
 
-    this.cacti.forEach((cactus) => {
-      cactus.update(this.speed, gameSpeed, frameTimeDelta, this.scaleRatio);
+    this.sapins.forEach((sapin) => {
+      sapin.update(this.speed, gameSpeed, frameTimeDelta, this.scaleRatio);
     });
 
-    this.cacti = this.cacti.filter((cactus) => cactus.x > -cactus.width);
+    this.sapins = this.sapins.filter((sapin) => sapin.x > -sapin.width);
   }
 
   draw() {
-    this.cacti.forEach((cactus) => cactus.draw());
+    this.sapins.forEach((sapin) => sapin.draw());
   }
 
   collideWith(sprite) {
-    return this.cacti.some((cactus) => cactus.collideWith(sprite));
+    return this.sapins.some((sapin) => sapin.collideWith(sprite));
   }
 
   reset() {
-    this.cacti = [];
+    this.sapins = [];
   }
 }
