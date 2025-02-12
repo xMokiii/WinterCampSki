@@ -206,4 +206,3 @@ function gameLoop(currentTime) {
 requestAnimationFrame(gameLoop);
 
 window.addEventListener("keyup", reset, { once: true });
-window.addEventListener("touchstart", reset, { once: true });
