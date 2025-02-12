@@ -1,7 +1,7 @@
 export default class Player {
-  WALK_ANIMATION_TIMER = 200;
-  walkAnimationTimer = this.WALK_ANIMATION_TIMER;
-  dinoRunImages = [];
+  SLIDE_ANIMATION_TIMER = 200;
+  slideAnimationTimer = this.SLIDE_ANIMATION_TIMER;
+  SkieurSlideImages = [];
 
   jumpPressed = false;
   jumpInProgress = false;
@@ -26,41 +26,24 @@ export default class Player {
     this.standingStillImage.src = "images/ski2.png";
     this.image = this.standingStillImage;
 
-    const dinoRunImage1 = new Image();
-    dinoRunImage1.src = "images/ski1.png";
+    const SkieurSlideImage1 = new Image();
+    SkieurSlideImage1.src = "images/ski1.png";
 
-    const dinoRunImage2 = new Image();
-    dinoRunImage2.src = "images/ski2.png";
+    const SkieurSlideImage2 = new Image();
+    SkieurSlideImage2.src = "images/ski2.png";
 
-    this.dinoRunImages.push(dinoRunImage1);
-    this.dinoRunImages.push(dinoRunImage2);
+    this.SkieurSlideImages.push(SkieurSlideImage1);
+    this.SkieurSlideImages.push(SkieurSlideImage2);
 
     // Image pour le Game Over
     this.gameOverImage = new Image();
     this.gameOverImage.src = "images/SkiFall.png"; // Chemin vers l'image de Game Over
 
     // Keyboard events
-    window.removeEventListener("keydown", this.keydown);
-    window.removeEventListener("keyup", this.keyup);
 
     window.addEventListener("keydown", this.keydown);
     window.addEventListener("keyup", this.keyup);
-
-    // Touch events
-    window.removeEventListener("touchstart", this.touchstart);
-    window.removeEventListener("touchend", this.touchend);
-
-    window.addEventListener("touchstart", this.touchstart);
-    window.addEventListener("touchend", this.touchend);
   }
-
-  touchstart = () => {
-    this.jumpPressed = true;
-  };
-
-  touchend = () => {
-    this.jumpPressed = false;
-  };
 
   keydown = (event) => {
     if (event.code === "Space") {
@@ -112,15 +95,15 @@ export default class Player {
   }
 
   run(gameSpeed, frameTimeDelta) {
-    if (this.walkAnimationTimer <= 0) {
-      if (this.image === this.dinoRunImages[0]) {
-        this.image = this.dinoRunImages[1];
+    if (this.slideAnimationTimer <= 0) {
+      if (this.image === this.SkieurSlideImages[0]) {
+        this.image = this.SkieurSlideImages[1];
       } else {
-        this.image = this.dinoRunImages[0];
+        this.image = this.SkieurSlideImages[0];
       }
-      this.walkAnimationTimer = this.WALK_ANIMATION_TIMER;
+      this.slideAnimationTimer = this.SLIDE_ANIMATION_TIMER;
     }
-    this.walkAnimationTimer -= frameTimeDelta * gameSpeed;
+    this.slideAnimationTimer -= frameTimeDelta * gameSpeed;
   }
 
   resetPosition() {
