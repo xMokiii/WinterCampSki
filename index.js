@@ -95,7 +95,6 @@ function getScaleRatio() {
     document.documentElement.clientWidth
   );
 
-  // Window is wider than the game width
   if (screenWidth / screenHeight < GAME_WIDTH / GAME_HEIGHT) {
     return screenWidth / GAME_WIDTH;
   } else {
@@ -172,7 +171,7 @@ function gameLoop(currentTime) {
   clearScreen();
 
   if (!gameOver && !waitingToStart) {
-    // Update game objects
+
     ground.update(gameSpeed, frameTimeDelta);
     treeController.update(gameSpeed, frameTimeDelta);
     player.update(gameSpeed, frameTimeDelta);
@@ -186,7 +185,7 @@ function gameLoop(currentTime) {
     score.setHighScore();
   }
 
-  // Draw game objects
+
   ground.draw();
   treeController.draw();
   player.draw(gameOver);
