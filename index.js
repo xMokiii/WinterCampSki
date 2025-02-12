@@ -13,7 +13,7 @@ const GAME_WIDTH = 800;
 const GAME_HEIGHT = 200;
 const PLAYER_WIDTH = 88 / 1.5; //58
 const PLAYER_HEIGHT = 94 / 1.5; //62
-const MAX_JUMP_HEIGHT = GAME_HEIGHT;
+const MAX_JUMP_HEIGHT = GAME_HEIGHT-20;
 const MIN_JUMP_HEIGHT = 150;
 const GROUND_WIDTH = 2400;
 const GROUND_HEIGHT = 24;
@@ -134,12 +134,12 @@ function reset() {
 }
 
 function showStartGameText() {
-  const fontSize = 40 * scaleRatio;
+  const fontSize = 45 * scaleRatio;
   ctx.font = `${fontSize}px Verdana`;
   ctx.fillStyle = "grey";
-  const x = canvas.width / 14;
+  const x = canvas.width / 4.5;
   const y = canvas.height / 2;
-  ctx.fillText("Tap Screen or Press Space To Start", x, y);
+  ctx.fillText("Press Space To Start", x, y);
 }
 
 function showGameOver() {

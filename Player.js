@@ -107,13 +107,13 @@ export default class Player {
   }
 
   resetPosition() {
-    this.y = this.yStandingPosition; // Repositionne le joueur au niveau du sol
+    this.y = this.yStandingPosition;
   }
 
   draw(isGameOver = false) {
     if (isGameOver) {
-      this.resetPosition(); // Réinitialise la position avant de dessiner
-      this.ctx.drawImage(this.gameOverImage, this.x, this.y, this.width, this.height);
+      this.resetPosition(); 
+      this.ctx.drawImage(this.gameOverImage, this.x, this.y+5, this.width, this.height-5);
     } else {
       this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
