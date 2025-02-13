@@ -8,7 +8,6 @@ const ctx = canvas.getContext("2d");
 
 const GAME_SPEED_START = 1; // 1.0
 const GAME_SPEED_INCREMENT = 0.00001;
-
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 200;
 const PLAYER_WIDTH = 88 / 1.5; //58
