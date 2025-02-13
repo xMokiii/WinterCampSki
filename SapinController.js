@@ -1,10 +1,10 @@
 import Sapin from "./Sapin.js";
 
 export default class SapinController {
-  CACTUS_INTERVAL_MIN = 500;
-  CACTUS_INTERVAL_MAX = 2000;
+  SAPIN_INTERVAL_MIN = 500;
+  SAPIN_INTERVAL_MAX = 2000;
 
-  nextCactusInterval = null;
+  nextSapinInterval = null;
   sapins = [];
 
   constructor(ctx, sapinsImages, scaleRatio, speed) {
@@ -14,23 +14,23 @@ export default class SapinController {
     this.scaleRatio = scaleRatio;
     this.speed = speed;
 
-    this.setNextCactusTime();
+    this.setNextSapinTime();
   }
 
-  setNextCactusTime() {
+  setNextSapinTime() {
     const num = this.getRandomNumber(
-      this.CACTUS_INTERVAL_MIN,
-      this.CACTUS_INTERVAL_MAX
+      this.SAPIN_INTERVAL_MIN,
+      this.SAPIN_INTERVAL_MAX
     );
 
-    this.nextCactusInterval = num;
+    this.nextSapinInterval = num;
   }
 
   getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  createCactus() {
+  createSapin() {
     const index = this.getRandomNumber(0, this.sapinsImages.length - 1);
     const sapinImage = this.sapinsImages[index];
     const x = this.canvas.width * 1.5;
@@ -48,11 +48,11 @@ export default class SapinController {
   }
 
   update(gameSpeed, frameTimeDelta) {
-    if (this.nextCactusInterval <= 0) {
-      this.createCactus();
-      this.setNextCactusTime();
+    if (this.nextSapinInterval <= 0) {
+      this.createSapin();
+      this.setNextSapinTime();
     }
-    this.nextCactusInterval -= frameTimeDelta;
+    this.nextSapinInterval -= frameTimeDelta;
 
     this.sapins.forEach((sapin) => {
       sapin.update(this.speed, gameSpeed, frameTimeDelta, this.scaleRatio);
