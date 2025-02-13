@@ -1,6 +1,6 @@
 import Player from "./Player.js";
 import Ground from "./Ground.js";
-import SapinController from "./SapinController.js";
+import TreeController from "./TreeController.js";
 import Score from "./Score.js";
 
 const canvas = document.getElementById("game");
@@ -28,7 +28,7 @@ const TREES_CONFIG = [
 // Game Objects
 let player = null;
 let ground = null;
-let sapinController = null; 
+let treeController = null; 
 let score = null;
 
 let scaleRatio = null;
@@ -74,7 +74,7 @@ function createSprites() {
     };
   });
 
-  sapinController = new SapinController(
+  treeController = new TreeController(
     ctx,
     treesImages,
     scaleRatio,
@@ -127,7 +127,7 @@ function reset() {
   gameOver = false;
   waitingToStart = false;
   ground.reset();
-  sapinController.reset();
+  treeController.reset();
   score.reset();
   gameSpeed = GAME_SPEED_START;
 }
@@ -173,13 +173,13 @@ function gameLoop(currentTime) {
   if (!gameOver && !waitingToStart) {
 
     ground.update(gameSpeed, frameTimeDelta);
-    sapinController.update(gameSpeed, frameTimeDelta);
+    treeController.update(gameSpeed, frameTimeDelta);
     player.update(gameSpeed, frameTimeDelta);
     score.update(frameTimeDelta);
     updateGameSpeed(frameTimeDelta);
   }
 
-  if (!gameOver && sapinController.collideWith(player)) {
+  if (!gameOver && treeController.collideWith(player)) {
     gameOver = true;
     setupGameReset();
     score.setHighScore();
@@ -187,7 +187,7 @@ function gameLoop(currentTime) {
 
 
   ground.draw();
-  sapinController.draw();
+  treeController.draw();
   player.draw(gameOver);
   score.draw();
 

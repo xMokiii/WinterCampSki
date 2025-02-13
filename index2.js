@@ -1,23 +1,22 @@
-import _______ from "./Player.js";
-import _______ from "./Ground.js";
-import TreeController from "./SapinController.js";
-import Score from "./Score.js";
+import Player from "_______";
+import _______ from "_______";
+import TreeController from "./TreeController.js";
+import _______ from "_______";
 
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+const _______ = document.getElementById("game");
+const ctx = _______.getContext("2d");
 
-const GAME_SPEED_START = 1; // 1.0
+const GAME_SPEED_START = 1; 
 const GAME_SPEED_INCREMENT = 0.00001;
-
-const GAME_WIDTH = 800;
-const GAME_HEIGHT = 200;
-const PLAYER_WIDTH = 88 / 1.5; //58
-const PLAYER_HEIGHT = 94 / 1.5; //62
-const MAX_JUMP_HEIGHT = GAME_HEIGHT-20;
-const MIN_JUMP_HEIGHT = 150;
-const GROUND_WIDTH = 2400;
-const GROUND_HEIGHT = 24;
-const GROUND_AND_TREES_SPEED = 0.5;
+const GAME_WIDTH = 800; 
+const _______ = 200; // Hauteur du jeu
+const _______ = 88 / 1.5; // Largeur du joueur
+const PLAYER_HEIGHT = 94 / 1.5; 
+const MAX________ = GAME_HEIGHT-20; // Hauteur de saut maximum
+const _______ = 150; // Hauteur de saut minimum
+const _______ = 2400; // Largeur du sol
+const _______ = 24; // Hauteur du sol
+const GROUND_AND_TREES_SPEED = 0.5; 
 
 const TREES_CONFIG = [
   { width: 48 / 1.25, height: 100 / 1.25, image: "images/sap1.png" },
