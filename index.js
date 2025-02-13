@@ -19,9 +19,9 @@ const GROUND_HEIGHT = 24;
 const GROUND_AND_TREES_SPEED = 0.5;
 
 const TREES_CONFIG = [
-  { width: 48 / 1.25, height: 100 / 1.25, image: "images/sap1.png" },
-  { width: 98 / 1.25, height: 100 / 1.25, image: "images/sap2.png" },
-  { width: 68 / 1.25, height: 70 / 1.25, image: "images/sap3.png" },  
+  { width: 48 / 1.25, height: 100 / 1.25, image: "images/sapin1.png" },
+  { width: 98 / 1.25, height: 100 / 1.25, image: "images/sapin2.png" },
+  { width: 68 / 1.25, height: 70 / 1.25, image: "images/sapin3.png" },  
 ];
 
 // Game Objects
@@ -63,6 +63,8 @@ function createSprites() {
     scaleRatio
   );
 
+  score = new Score(ctx, scaleRatio);
+
   const treesImages = TREES_CONFIG.map((trees) => {
     const image = new Image();
     image.src = trees.image;
@@ -79,8 +81,6 @@ function createSprites() {
     scaleRatio,
     GROUND_AND_TREES_SPEED
   );
-
-  score = new Score(ctx, scaleRatio);
 }
 
 function getScaleRatio() {

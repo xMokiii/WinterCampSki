@@ -4,7 +4,7 @@ import TreeController from "./TreeController.js";
 import _______ from "_______";
 
 const _______ = document.getElementById("game");
-const ctx = _______.getContext("2d");
+const ctx = _______.getContext("2d"); // Contexte du dessin = Canvas 2d
 
 const GAME_SPEED_START = 1; 
 const GAME_SPEED_INCREMENT = 0.00001;
@@ -19,46 +19,46 @@ const _______ = 24; // Hauteur du sol
 const GROUND_AND_TREES_SPEED = 0.5; 
 
 const TREES_CONFIG = [
-  { width: 48 / 1.25, height: 100 / 1.25, image: "images/sap1.png" },
-  { width: 98 / 1.25, height: 100 / 1.25, image: "images/sap2.png" },
-  { width: 68 / 1.25, height: 70 / 1.25, image: "images/sap3.png" },  
+  { width: 48 / 1.25, height: 100 / 1.25, image: "images/sapin1.png" },
+  { width: 98 / 1.25, height: 100 / 1.25, image: "images/sapin2.png" },
+  { width: 68 / 1.25, height: 70 / 1.25, image: "images/sapin3.png" },  
 ];
 
 // Game Objects
-let player = null;
-let ground = null;
-let treeController = null; 
-let score = null;
+let player = _______;
+let ground = _______;
+let treeController = _______; 
+let score = _______;
 
-let scaleRatio = null;
-let previousTime = null;
+let scaleRatio = _______;
+let previousTime = _______;
 let gameSpeed = GAME_SPEED_START;
-let gameOver = false;
-let hasAddedEventListenersForRestart = false;
-let waitingToStart = true;
+let gameOver = _______;
+let hasAddedEventListenersForRestart = _______;
+let waitingToStart = _______;
 
 function createSprites() {
-  const playerWidthInGame = PLAYER_WIDTH * scaleRatio;
-  const playerHeightInGame = PLAYER_HEIGHT * scaleRatio;
-  const minJumpHeightInGame = MIN_JUMP_HEIGHT * scaleRatio;
-  const maxJumpHeightInGame = MAX_JUMP_HEIGHT * scaleRatio;
+  const playerWidthInGame = _______ * _______;
+  const playerHeightInGame = _______ * _______;
+  const minJumpHeightInGame = _______ * _______;
+  const maxJumpHeightInGame = _______ * _______;
 
-  const groundWidthInGame = GROUND_WIDTH * scaleRatio;
-  const groundHeightInGame = GROUND_HEIGHT * scaleRatio;
+  const groundWidthInGame = _______ * _______;
+  const groundHeightInGame = _______ * _______;
 
-  player = new Player(
+  _______ = new Player(
     ctx,
     playerWidthInGame,
-    playerHeightInGame,
+    _______,
     minJumpHeightInGame,
-    maxJumpHeightInGame,
+    _______,
     scaleRatio
   );
 
-  ground = new Ground(
+  ground = new _______(
     ctx,
-    groundWidthInGame,
-    groundHeightInGame,
+    _______,
+    _______,
     GROUND_AND_TREES_SPEED,
     scaleRatio
   );
